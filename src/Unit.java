@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 
 public class Unit {
 	private Field field;
@@ -6,6 +7,7 @@ public class Unit {
 	private boolean selected = false;
 	private int targetX;
 	private int targetY;
+	private ArrayList<Point> path = new ArrayList<Point>();
 	
 	public Unit(Field field, int x, int y) {
 		this.x = x;
@@ -33,30 +35,29 @@ public class Unit {
 
 	public void setTarget(int targetX, int targetY) {
 		if (targetX >= 0 && targetX < field.getCol() && targetY >= 0 && targetY < field.getRow()) {
+			if (field.getMap()[targetY][targetX] != Field.FREE)
+				return;
+			
 			this.targetX = targetX;
 			this.targetY = targetY;
+			path = new WaveAlg().findPath(field.getMap(), this.x, this.y, targetX, targetY);
 		}
 	}
 	
+	public int getDir(){
+		return 0;
+	}
+	
 	public void tick() {
-		int nextX = x;
-		int nextY = y;
-		if (x > targetX) {
-			nextX--;
-		}else if(x < targetX) {
-			nextX++;
-		}
-		
-		if (y > targetY) {
-			nextY--;
-		}else if(y < targetY) {
-			nextY++;
-		}
-		if (field.get(nextX, nextY) == 0) {
-			field.set(x, y, field.FREE);
-			x = nextX;
-			y = nextY;
-			field.set(x, y, field.UNIT);
+		if(path!=null && path.size()>1) {
+			Point p = path.get(1);
+			if (field.get(p.x, p.y) == Field.FREE) {
+				field.set(x, y, Field.FREE);
+				x = p.x;
+				y = p.y;
+				field.set(x, y, field.UNIT);
+				path.remove(1);
+			}
 		}
 	}
 }

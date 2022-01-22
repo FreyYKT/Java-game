@@ -1,16 +1,21 @@
-
-
 public class Field {
 	private final int col = 8;
 	private final int row = 8;
 	int[][] map = new int[row][col];
 	
-	public final int FREE =  0;
+	public static final int FREE = -1;
 	public final int WALL = -2;
-	public final int UNIT = -10;
+	public final int UNIT = -5;
 	
 	public Field() {
 		super();
+		
+		for(int i=0; i<map.length; i++) {
+			for(int j=0; j<map[0].length; j++) {
+				map[i][j] = FREE;
+			}
+		} 
+		
 		map[0][0] = this.WALL;
 		map[0][1] = this.WALL;
 		map[1][0] = this.WALL;

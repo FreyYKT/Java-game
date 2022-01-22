@@ -1,7 +1,8 @@
-
-
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 
 public class UnitController {
@@ -38,12 +39,25 @@ public class UnitController {
 
 	public void render(Graphics g) {
 		for(Unit u: units) {
-			g.setColor(Color.BLUE);
-			g.fillOval(u.getX()*grid.width+grid.offsetX, u.getY()*grid.height
+			Graphics2D g2d = (Graphics2D) g;
+			g2d.setRenderingHint(
+			    RenderingHints.KEY_ANTIALIASING,
+			    RenderingHints.VALUE_ANTIALIAS_ON);
+			g2d.setStroke(new BasicStroke(1f));
+			 
+			
+			g2d.setColor(Color.BLUE);
+			g2d.fillOval(u.getX()*grid.width+grid.offsetX, u.getY()*grid.height
 					+grid.offsetY, grid.width, grid.height);
+			
+			g2d.setColor(Color.BLACK);
+			g2d.fillArc(u.getX()*grid.width+grid.offsetX, u.getY()*grid.height
+					+grid.offsetY, grid.width, grid.height, 68 - 45*u.getDir(), 44);
+			
 			if(u.isSelected()) {
-				g.setColor(Color.RED);
-				g.drawOval(u.getX()*grid.width+grid.offsetX, u.getY()*grid.height
+				g2d.setStroke(new BasicStroke(2f));
+				g2d.setColor(Color.RED);
+				g2d.drawOval(u.getX()*grid.width+grid.offsetX, u.getY()*grid.height
 					+grid.offsetY, grid.width, grid.height);
 			}
 		}

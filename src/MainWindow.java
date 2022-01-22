@@ -28,6 +28,7 @@ public class MainWindow extends JFrame implements Runnable {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				unitController.mouseClicked(e);
+				repaint();
 			}
 		});
 	}
