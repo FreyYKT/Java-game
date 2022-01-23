@@ -39,6 +39,9 @@ public class UnitController {
 
 	public void render(Graphics g) {
 		for(Unit u: units) {
+			int _x = u.getX()*grid.width + grid.offsetX;
+			int _y = u.getY()*grid.height + grid.offsetY;
+			
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setRenderingHint(
 			    RenderingHints.KEY_ANTIALIASING,
@@ -46,18 +49,18 @@ public class UnitController {
 			g2d.setStroke(new BasicStroke(1f));
 			 
 			g2d.setColor(Color.BLUE);
-			g2d.fillOval(u.getX()*grid.width+grid.offsetX, u.getY()*grid.height
-					+grid.offsetY, grid.width, grid.height);
+			g2d.fillOval(_x, _y, grid.width, grid.height);
 			
 			g2d.setColor(Color.BLACK);
-			g2d.fillArc(u.getX()*grid.width+grid.offsetX, u.getY()*grid.height
-					+grid.offsetY, grid.width, grid.height, 68 - 45*u.getDirection(), 44);
+			g2d.fillArc(_x, _y, grid.width, grid.height, 68 - 45*u.getDirection(), 44);
+			
+			g2d.setColor(Color.YELLOW);
+			g2d.drawString(u.getClass().getSimpleName(), _x + 5, _y + 40);
 			
 			if(u.isSelected()) {
 				g2d.setStroke(new BasicStroke(2f));
 				g2d.setColor(Color.RED);
-				g2d.drawOval(u.getX()*grid.width+grid.offsetX, u.getY()*grid.height
-					+grid.offsetY, grid.width, grid.height);
+				g2d.drawOval(_x, _y, grid.width, grid.height);
 			}
 		}
 	}
