@@ -4,8 +4,8 @@ public class Field {
 	int[][] map = new int[row][col];
 	
 	public static final int FREE = -1;
-	public final int WALL = -2;
-	public final int UNIT = -5;
+	public static final int WALL = -2;
+	public static final int UNIT = -5;
 	
 	public Field() {
 		super();

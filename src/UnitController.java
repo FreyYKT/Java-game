@@ -11,8 +11,8 @@ public class UnitController {
 	
 	public UnitController(Field field, Grid grid) {
 		units[0]= new Unit(field, 3, 1);
-		units[1]= new Unit(field, 2, 3);
-		units[2]= new Unit(field, 7, 5);
+		units[1]= new Builder(field, 2, 3);
+		units[2]= new Dummy(field, 7, 5);
 		this.grid = grid;
 	}
 
@@ -45,14 +45,13 @@ public class UnitController {
 			    RenderingHints.VALUE_ANTIALIAS_ON);
 			g2d.setStroke(new BasicStroke(1f));
 			 
-			
 			g2d.setColor(Color.BLUE);
 			g2d.fillOval(u.getX()*grid.width+grid.offsetX, u.getY()*grid.height
 					+grid.offsetY, grid.width, grid.height);
 			
 			g2d.setColor(Color.BLACK);
 			g2d.fillArc(u.getX()*grid.width+grid.offsetX, u.getY()*grid.height
-					+grid.offsetY, grid.width, grid.height, 68 - 45*u.getDir(), 44);
+					+grid.offsetY, grid.width, grid.height, 68 - 45*u.getDirection(), 44);
 			
 			if(u.isSelected()) {
 				g2d.setStroke(new BasicStroke(2f));
