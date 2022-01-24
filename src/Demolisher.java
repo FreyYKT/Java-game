@@ -6,6 +6,6 @@ public class Demolisher extends Unit {
 	@Override
 	public void tick() {
 		super.tick();
-		ability.demolish();
+		ability.demolish(this.field, this.x, this.y, this.getDirection());
 	}
 }

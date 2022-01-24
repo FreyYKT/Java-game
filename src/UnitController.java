@@ -10,7 +10,7 @@ public class UnitController {
 	private Grid grid;
 	
 	public UnitController(Field field, Grid grid) {
-		units[0]= new Unit(field, 3, 1);
+		units[0]= new Demolisher(field, 3, 1);
 		units[1]= new Builder(field, 2, 3);
 		units[2]= new Dummy(field, 7, 5);
 		this.grid = grid;

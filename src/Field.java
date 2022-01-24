@@ -16,21 +16,21 @@ public class Field {
 			}
 		} 
 		
-		map[0][0] = this.WALL;
-		map[0][1] = this.WALL;
-		map[1][0] = this.WALL;
-		map[0][2] = this.WALL;
-		map[1][2] = this.WALL;
-		map[2][2] = this.WALL;
-		map[2][3] = this.WALL;
-		map[2][4] = this.WALL;
-		map[3][3] = this.WALL;
-		map[4][3] = this.WALL;
+		map[0][0] = Field.WALL;
+		map[0][1] = Field.WALL;
+		map[1][0] = Field.WALL;
+		map[0][2] = Field.WALL;
+		map[1][2] = Field.WALL;
+		map[2][2] = Field.WALL;
+		map[2][3] = Field.WALL;
+		map[2][4] = Field.WALL;
+		map[3][3] = Field.WALL;
+		map[4][3] = Field.WALL;
 		
-		map[6][7] = this.WALL;
-		map[7][7] = this.WALL;
-		map[7][6] = this.WALL;
-		map[7][5] = this.WALL;
+		map[6][7] = Field.WALL;
+		map[7][7] = Field.WALL;
+		map[7][6] = Field.WALL;
+		map[7][5] = Field.WALL;
 	}
 	
 	public int[][] getMap() { return map; }
@@ -38,6 +38,6 @@ public class Field {
 	public int getCol() { return map[0].length; }
 	public int getRow() { return map.length; }
 
-	public void set(int x, int y, int status) { map[y][x] = status; }
+	public void set(int x, int y, int status) { if (x >= 0 && x <= map[0].length && y >= 0 && y <= map.length) map[y][x] = status; }
 	public int get(int x, int y) { return map[y][x]; }
 }

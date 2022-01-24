@@ -14,7 +14,7 @@ public class Unit {
 	private HashMap<Integer, Integer> turnMap = new HashMap<Integer, Integer>();
 	
 	protected int previousX, previousY;
-	private int x, y;
+	protected int x, y;
 	private int targetX, targetY;
 	private boolean selected = false;
 	
