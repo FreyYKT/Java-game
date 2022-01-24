@@ -23,8 +23,6 @@ public class WaveAlg {
 		this.x = x;
 		this.y = y;
 		
-		System.out.println("======" + targetX + " " + targetY);
-		
 		cloneMap = clone(map);
 		stepNum = 0;
 		oldWave.clear();
@@ -38,14 +36,8 @@ public class WaveAlg {
 			waveRecovery();
 		}else { //No way, but try get closer
 			Point newTarget = getCloser();
-			print(cloneMap);
-			if (newTarget.x >= 0 && newTarget.y >= 0) {
-				wave = findPath(map, x, y, newTarget.x, newTarget.y);
-				waveOut(wave);
-			}else {
-				System.out.println("No way."); 
-			}
-			
+			if (newTarget.x >= 0 && newTarget.y >= 0) wave = findPath(map, x, y, newTarget.x, newTarget.y);
+			else  System.out.println("No way."); 
 		}
 		
 		return wave;
@@ -107,10 +99,15 @@ public class WaveAlg {
 
         for (int i = 0; i < cloneMap.length; i++) {
             for (int j = 0; j < cloneMap[i].length; j++) {
-                if (cloneMap[i][j] >= 0 && Math.max(Math.abs(targetY - i), Math.abs(targetX - j)) < _min) {
-                    System.out.println("gc " + i + " " + j + "   " + cloneMap[i][j] + "   " + Math.max(Math.abs(targetY - i), Math.abs(targetX - j)));
-                    _min = Math.max(Math.abs(targetY - i), Math.abs(targetX - j));
-                    newTarget.x = j; newTarget.y = i;
+                if (cloneMap[i][j] >= 0) {
+                	if (Math.max(Math.abs(targetY - i), Math.abs(targetX - j)) < _min) {
+	                    _min = Math.max(Math.abs(targetY - i), Math.abs(targetX - j));
+	                    newTarget.x = j; newTarget.y = i;
+                	} else if (Math.max(Math.abs(targetY - i), Math.abs(targetX - j)) == _min){
+                		if (j == targetX || i == targetY) {
+                			newTarget.x = j; newTarget.y = i;
+                		}
+                	}
                 }
             }
         }
@@ -130,25 +127,5 @@ public class WaveAlg {
 		
 		return cloneMap;
 	}
-	
-	private int[][] print(int[][] map) {
-		int[][] cloneMap = new int[map.length][map[0].length];
-		
-		for (int i = 0; i < map.length; i++) {
-			for (int j=0; j < map[i].length; j++) {
-				System.out.print(map[i][j] + " ");
-			}
-			System.out.println();
-		}
-		System.out.println();
-		System.out.println();
-		
-		return cloneMap;
-	}
-	
-	public void waveOut(ArrayList<Point> wave) {
-		for(Point p: wave) {
-			System.out.println("x="+p.x+",y="+p.y);
-		}
-	}
+
 }
