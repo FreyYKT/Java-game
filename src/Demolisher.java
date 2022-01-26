@@ -1,6 +1,6 @@
 public class Demolisher extends Unit {
-	public Demolisher(Field field, int x, int y) {
-		super(field, x, y);
+	public Demolisher(Field field, int x, int y, int speed, int health, int damage) {
+		super(field, x, y, speed, health, damage);
 	}
 
 	@Override

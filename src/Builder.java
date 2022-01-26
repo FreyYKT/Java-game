@@ -1,6 +1,6 @@
 public class Builder extends Unit{
-	public Builder(Field field, int x, int y) {
-		super(field, x, y);
+	public Builder(Field field, int x, int y, int speed, int health, int damage) {
+		super(field, x, y, speed, health, damage);
 	}
 	
 	@Override
