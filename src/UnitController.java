@@ -10,9 +10,10 @@ public class UnitController {
 	private Grid grid;
 	
 	public UnitController(Field field, Grid grid) {
-		units[0]= new Demolisher(field, 3, 1);
-		units[1]= new Builder(field, 2, 3);
-		units[2]= new Dummy(field, 7, 5);
+		//                              x  y  speed  hp dmg
+		units[0]= new Demolisher(field, 3, 1,   1,   15, 2);
+		units[1]= new    Builder(field, 2, 3,   3,   10, 1);
+		units[2]= new      Dummy(field, 7, 5,   2,  100, 0);
 		this.grid = grid;
 	}
 
@@ -47,15 +48,31 @@ public class UnitController {
 			    RenderingHints.KEY_ANTIALIASING,
 			    RenderingHints.VALUE_ANTIALIAS_ON);
 			g2d.setStroke(new BasicStroke(1f));
-			 
-			g2d.setColor(Color.BLUE);
+			
+			//body (circle)
+			if (u.isDead())
+				g2d.setColor(Color.DARK_GRAY);
+			else
+				g2d.setColor(Color.BLUE);
 			g2d.fillOval(_x, _y, grid.width, grid.height);
 			
+			//face
 			g2d.setColor(Color.BLACK);
 			g2d.fillArc(_x, _y, grid.width, grid.height, 68 - 45*u.getDirection(), 44);
 			
+			//unit type
 			g2d.setColor(Color.YELLOW);
 			g2d.drawString(u.getClass().getSimpleName(), _x + 5, _y + 40);
+			
+			//health bar
+			//line
+			float fillness = ((float)u.getHealth() / (float)u.getMaxHealth()) * 49.0f;
+			
+			g2d.setColor(Color.RED);
+			g2d.fillRect(_x + 1, _y + 44, (int)fillness, 5);
+			//frame
+			g2d.setColor(Color.DARK_GRAY);
+			g2d.drawRect(_x + 1, _y + 44, 49, 5);
 			
 			if(u.isSelected()) {
 				g2d.setStroke(new BasicStroke(2f));

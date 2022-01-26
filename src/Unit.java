@@ -18,7 +18,14 @@ public class Unit {
 	private int targetX, targetY;
 	private boolean selected = false;
 	
-	public Unit(Field field, int x, int y) {
+	private int maxHealth;
+	private int health;
+	private int damage;
+	private boolean isDead;
+	
+	private int speed;
+	
+	public Unit(Field field, int x, int y, int speed, int health, int damage) {
 		this.x = x;
 		this.y = y;
 		targetX = x;
@@ -41,8 +48,30 @@ public class Unit {
 		turnMap.put(5,  1);
 		turnMap.put(6,  1);
 		turnMap.put(7,  1);
+		
+		this.isDead = false;
+		this.maxHealth = health; 
+		this.health = health;
+		this.damage = damage;
 	}
 	
+	//Health and damage
+	public void takeDamage(int damage) {
+		if (this.health == 0) return;
+		
+		this.health -= damage;
+		
+		if (this.health <= 0) { 
+			this.isDead = true;
+			this.health = 0;
+		}
+	}
+	public boolean isDead() { return this.isDead; }
+	public int getDamage() { return this.damage; }
+	public int getHealth() { return this.health; }
+	public int getMaxHealth() { return this.maxHealth; }
+	
+	//Moving and coordinates 
 	public int getY() {return y;}
 	public int getX() {return x;}
 	public void setY(int y) {this.y = y;}
