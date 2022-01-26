@@ -38,6 +38,6 @@ public class Field {
 	public int getCol() { return map[0].length; }
 	public int getRow() { return map.length; }
 
-	public void set(int x, int y, int status) { if (x >= 0 && x <= map[0].length && y >= 0 && y <= map.length) map[y][x] = status; }
+	public void set(int x, int y, int status) { if (x >= 0 && x < map[0].length && y >= 0 && y < map.length) map[y][x] = status; }
 	public int get(int x, int y) { return map[y][x]; }
 }
