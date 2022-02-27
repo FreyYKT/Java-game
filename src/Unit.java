@@ -23,6 +23,7 @@ public class Unit {
 	private int damage;
 	private boolean isDead;
 	
+	private int tickCounter;
 	private int speed;
 	
 	public Unit(Field field, int x, int y, int speed, int health, int damage) {
@@ -53,6 +54,9 @@ public class Unit {
 		this.maxHealth = health; 
 		this.health = health;
 		this.damage = damage;
+		
+		this.speed = speed;
+		this.tickCounter = 0;
 	}
 	
 	//Health and damage
@@ -103,7 +107,8 @@ public class Unit {
 //			-1 0 1		-1 -1 -1		-4 -3 -2		 2  3  4
 				
 			if(directions.get(0) == newTrend) {
-				if (field.get(p.x, p.y) == Field.FREE) {
+				tickCounter++;
+				if (field.get(p.x, p.y) == Field.FREE && tickCounter == speed) {
 					field.set(x, y, Field.FREE);
 					previousX = x;
 					previousY = y;
@@ -111,7 +116,9 @@ public class Unit {
 					y = p.y;
 					field.set(x, y, Field.UNIT);
 					path.remove(1);
+					tickCounter = 0;
 				}
+				
 			}else {
 				int additiveTurn = 0;
 				for(int i = 0; i < directions.size(); i++) {
