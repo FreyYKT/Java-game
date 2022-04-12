@@ -4,16 +4,17 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class UnitController {
-	private Unit[] units = new Unit[3];
+	private ArrayList<Unit> units = new ArrayList<Unit>();
 	private Grid grid;
 	
 	public UnitController(Field field, Grid grid) {
 		//                              x  y  speed  hp dmg
-		units[0]= new Demolisher(field, 3, 1,   1,   15, 2);
-		units[1]= new    Builder(field, 2, 3,   3,   10, 1);
-		units[2]= new      Dummy(field, 7, 5,   2,  100, 0);
+		units.add(new Demolisher(field, 3, 1,   1,   15, 2));
+		units.add(new    Builder(field, 2, 3,   3,   10, 1));
+		units.add(new      Dummy(field, 7, 5,   2,  100, 0));
 		this.grid = grid;
 	}
 
@@ -58,7 +59,7 @@ public class UnitController {
 			
 			//face
 			g2d.setColor(Color.BLACK);
-			g2d.fillArc(_x, _y, grid.width, grid.height, 68 - 45*u.getDirection(), 44);
+			g2d.fillArc(_x, _y, grid.width, grid.height, 68 - 45*u.getDirection(), 44); 
 			
 			//unit type
 			g2d.setColor(Color.YELLOW);
