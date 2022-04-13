@@ -1,4 +1,30 @@
+import java.util.ArrayList;
+
 public class Ability {
+	public void attack(Unit unit, int damage) {
+		unit.takeDamage(damage);
+	}
+	
+	public ArrayList<Unit> lookAround(Unit player, ArrayList<Unit> units) {
+		ArrayList<Unit> neighbours = new ArrayList<Unit>();
+		int[] dx = { 0, 1, 0, -1,-1, 1,-1, 1};
+		int[] dy = {-1, 0, 1,  0,-1,-1, 1, 1};
+		for(Unit u: units) {
+			int neighbourNum = dx.length;
+			int x = 0;
+			int y = 0;
+			for(int _d = 0; _d < neighbourNum; _d++) {
+				x = player.getX()+dx[_d];
+				y = player.getY()+dy[_d];
+				if(u.getX() == x && u.getY() == y) {
+					neighbours.add(u);
+				}
+			}
+		}
+		
+		return neighbours;
+	}
+	
 	public void build(Field field, int x, int y) {
 		field.set(x, y, Field.WALL);
 	}
