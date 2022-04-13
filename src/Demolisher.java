@@ -15,7 +15,9 @@ public class Demolisher extends Unit {
 			
 			if (!u.isDead()) {
 				this.clearPath();
-				ability.attack(u, this.getDamage());
+				if (ability.isFaceToFace(this, u)) {
+					ability.attack(u, this.getDamage());
+				}
 			}
 		} 
 	}
