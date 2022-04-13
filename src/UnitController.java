@@ -86,7 +86,7 @@ public class UnitController {
 	public void tick() {
 		for (Unit u: units) {
 			if (u.isSelected() && !u.isDead()) {
-				u.tick();
+				u.tick(units);
 			}
 		}
 	}

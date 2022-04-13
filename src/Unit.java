@@ -97,7 +97,9 @@ public class Unit {
 		}
 	}
 	
-	public void tick() {
+	public void clearPath() { path.clear(); }
+	
+	public void tick(ArrayList<Unit> units) {
 		if(path!=null && path.size()>1) {
 			Point p = path.get(1);
 			int newTrend = directionMap.get((p.x - x) + 3*(p.y - y));
