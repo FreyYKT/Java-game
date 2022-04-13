@@ -97,18 +97,30 @@ public class Unit {
 		}
 	}
 	
+	public void changeDirection(int newDirection) {
+		if (directions.get(0) != newDirection) {
+			int additiveTurn = 0;
+			for(int i = 0; i < directions.size(); i++) {
+				if(directions.get(i) == newDirection) {
+					additiveTurn = i; break;
+				}
+			}
+			Collections.rotate(directions, turnMap.get(additiveTurn));
+		}
+	}
+	
 	public void clearPath() { path.clear(); }
 	
 	public void tick(ArrayList<Unit> units) {
 		if(path!=null && path.size()>1) {
 			Point p = path.get(1);
-			int newTrend = directionMap.get((p.x - x) + 3*(p.y - y));
+			int newDirection = directionMap.get((p.x - x) + 3*(p.y - y));
 //			p.x-x:		 p.y-y:			sum:			directionMap:
 //			-1 0 1		 1  1  1		 2  3  4		-4 -3 -2
 //			-1 ^ 1		 0  ^  0		-1  ^  1		-1  ^  1
 //			-1 0 1		-1 -1 -1		-4 -3 -2		 2  3  4
 				
-			if(directions.get(0) == newTrend) {
+			if(directions.get(0) == newDirection) {
 				tickCounter++;
 				if (field.get(p.x, p.y) == Field.FREE && tickCounter == speed) {
 					field.set(x, y, Field.FREE);
@@ -122,13 +134,7 @@ public class Unit {
 				}
 				
 			}else {
-				int additiveTurn = 0;
-				for(int i = 0; i < directions.size(); i++) {
-					if(directions.get(i) == newTrend) {
-						additiveTurn = i; break;
-					}
-				}
-				Collections.rotate(directions, turnMap.get(additiveTurn));
+				changeDirection(newDirection);
 			}
 		}
 	}
